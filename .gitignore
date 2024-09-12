@@ -16,6 +16,6 @@
 ###< friendsofphp/php-cs-fixer ###
 
 ###> phpstan/phpstan ###
-phpstan.neon
-/.phpstan.neon.dist
+phpstan.neon.dist
+/phpstan.dist.neon
 ###< phpstan/phpstan ###
