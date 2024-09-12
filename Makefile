@@ -1,0 +1,2 @@
+start:
+	symfony server:start
