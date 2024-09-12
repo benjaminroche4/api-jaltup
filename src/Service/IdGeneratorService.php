@@ -15,7 +15,7 @@ class IdGeneratorService
         $characters = array_merge($digits, $uppercaseLetters);
         $randomString = '';
 
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             $randomString .= $characters[random_int(0, count($characters) - 1)];
         }
 

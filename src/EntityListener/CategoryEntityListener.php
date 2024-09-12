@@ -11,6 +11,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * The EntityListener of the Category entity.
+ *
  * @AsEntityListener(event="prePersist", entity=Category::class)
  */
 #[AsEntityListener(event: Events::prePersist, entity: Category::class)]
@@ -18,18 +19,17 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 readonly class CategoryEntityListener
 {
     public function __construct(
-        private SluggerInterface $slugger
-    )
-    {
+        private SluggerInterface $slugger,
+    ) {
     }
 
-    public function prePersist(Category $category, LifecycleEventArgs $args):void
+    public function prePersist(Category $category, LifecycleEventArgs $args): void
     {
-       $category->setSlug($this->slugger->slug($category->getName())->lower()->toString());
-       $category->setPublicId(IdGeneratorService::generateUniqueId(6));
+        $category->setSlug($this->slugger->slug($category->getName())->lower()->toString());
+        $category->setPublicId(IdGeneratorService::generateUniqueId(6));
     }
 
-    public function preUpdate(Category $category, LifecycleEventArgs $args):void
+    public function preUpdate(Category $category, LifecycleEventArgs $args): void
     {
         $this->slugger->slug($category->getName())->lower()->toString();
     }

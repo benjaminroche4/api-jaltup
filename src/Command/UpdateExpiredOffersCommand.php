@@ -21,9 +21,8 @@ class UpdateExpiredOffersCommand extends Command
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private OfferRepository $offerRepository
-    )
-    {
+        private OfferRepository $offerRepository,
+    ) {
         parent::__construct();
     }
 
@@ -46,7 +45,7 @@ class UpdateExpiredOffersCommand extends Command
         }
 
         $this->entityManager->flush();
-        $io->success(count($expiredOffers) . ' offers were updated to "Expired".');
+        $io->success(count($expiredOffers).' offers were updated to "Expired".');
 
         return Command::SUCCESS;
     }

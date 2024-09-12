@@ -14,15 +14,11 @@ use App\Enum\ContractType;
 use App\Enum\PublicationStatus;
 use App\Enum\StudyLevel;
 use App\Repository\OfferRepository;
-use App\Service\IdGeneratorService;
-use Composer\Package\Link;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Serializer\Attribute\Groups;
-use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -58,7 +54,7 @@ class Offer
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['offer:read'])]
     #[Assert\Unique]
-    #[ApiProperty(description: 'The public identifier of the offer.',)]
+    #[ApiProperty(description: 'The public identifier of the offer.', )]
     private ?string $publicId = null;
 
     #[ORM\Column(length: 120)]
@@ -152,7 +148,7 @@ class Offer
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Url]
     #[Groups(['offer:read', 'offer:write'])]
-    #[ApiProperty(description: 'Original URL of the offer',)]
+    #[ApiProperty(description: 'Original URL of the offer', )]
     private ?string $url = null;
 
     #[ORM\Column(nullable: true)]
@@ -175,7 +171,7 @@ class Offer
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['offer:read'])]
-    #[ApiProperty(description: 'The date when it will be set to "Archived".',)]
+    #[ApiProperty(description: 'The date when it will be set to "Archived".', )]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(length: 255)]

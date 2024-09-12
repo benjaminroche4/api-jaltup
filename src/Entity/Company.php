@@ -10,7 +10,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Repository\CompanyRepository;
-use Composer\Package\Link;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriVariables: ['publicId'],
         ),
         new GetCollection(),
-        new Post()
+        new Post(),
     ],
     normalizationContext: [
         'groups' => ['company:read'],
@@ -50,7 +49,7 @@ class Company
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['company:read'])]
     #[Assert\Unique]
-    #[ApiProperty(description: 'The public identifier of the company.',)]
+    #[ApiProperty(description: 'The public identifier of the company.', )]
     private ?string $publicId = null;
 
     #[ORM\Column(length: 120)]

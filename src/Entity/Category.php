@@ -8,16 +8,12 @@ use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use App\Repository\CategoryRepository;
-use App\Service\IdGeneratorService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Serializer\Attribute\Groups;
-use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -33,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriVariables: ['publicId'],
         ),
         new GetCollection(),
-        new Post()
+        new Post(),
     ],
     normalizationContext: [
         'groups' => ['category:read'],
@@ -53,7 +49,7 @@ class Category
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['category:read'])]
     #[Assert\Unique]
-    #[ApiProperty(description: 'The public identifier of the category.',)]
+    #[ApiProperty(description: 'The public identifier of the category.', )]
     private ?string $publicId = null;
 
     #[ORM\Column(length: 120)]

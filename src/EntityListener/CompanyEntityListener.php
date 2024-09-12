@@ -12,6 +12,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * The EntityListener of the Company entity.
+ *
  * @AsEntityListener(event="prePersist", entity=Category::class)
  */
 #[AsEntityListener(event: Events::prePersist, entity: Company::class)]
@@ -19,19 +20,18 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 readonly class CompanyEntityListener
 {
     public function __construct(
-        private SluggerInterface $slugger
-    )
-    {
+        private SluggerInterface $slugger,
+    ) {
     }
 
-    public function prePersist(Company $company, LifecycleEventArgs $args):void
+    public function prePersist(Company $company, LifecycleEventArgs $args): void
     {
         $company->setSlug($this->slugger->slug($company->getName())->lower()->toString());
         $company->setPublicId(IdGeneratorService::generateUniqueId(6));
         $company->setCreatedAt(new \DateTimeImmutable());
     }
 
-    public function preUpdate(Company $company, LifecycleEventArgs $args):void
+    public function preUpdate(Company $company, LifecycleEventArgs $args): void
     {
         $company->setSlug($this->slugger->slug($company->getName())->lower()->toString());
     }
