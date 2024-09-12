@@ -3,9 +3,10 @@
 namespace App\Enum;
 
 /**
- * Enum ContractType
+ * Enum ContractType.
  */
-enum ContractType: string {
+enum ContractType: string
+{
     case FixedTerm = 'fixed_term'; // CDD
     case Permanent = 'permanent'; // CDI
     case Apprenticeship = 'apprenticeship'; // Alternance
