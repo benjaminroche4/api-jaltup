@@ -14,6 +14,10 @@ cs-fixer:
 stan:
 	vendor/bin/phpstan analyse src
 
+#Running PHPMD to check the code (check only src folder) // PSR12 Code Styling.
+md:
+	./vendor/bin/phpmd src text .phpmd.xml.dist
+
 #Clear the cache.
 clear:
 	php bin/console cache:clear

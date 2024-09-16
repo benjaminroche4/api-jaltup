@@ -83,6 +83,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",
         "phpstan/phpstan": "^1.12",
-        "symfony/maker-bundle": "^1.61"
+        "symfony/maker-bundle": "^1.61",
+        "phpmd/phpmd" : "@stable"
     }
 }
