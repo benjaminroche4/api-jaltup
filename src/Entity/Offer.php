@@ -14,6 +14,7 @@ use App\Enum\ContractType;
 use App\Enum\PublicationStatus;
 use App\Enum\StudyLevel;
 use App\Repository\OfferRepository;
+use App\State\OfferCountProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -29,6 +30,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     description: 'Get the offer information.',
     operations: [
+        new Get(
+            uriTemplate: '/offers/count',
+            openapiContext: [
+                'summary' => 'Get the number of published offers.',
+                'responses' => [
+                    '200' => [
+                        'description' => 'The number of published offers.',
+                        'content' => [
+                            'application/ld+json' => [
+                                'schema' => [
+                                    'type' => 'object',
+                                    'properties' => [
+                                        'count' => [
+                                            'type' => 'integer',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            provider: OfferCountProvider::class,
+        ),
         new Get(
             uriTemplate: '/offers/{publicId}',
             uriVariables: ['publicId'],

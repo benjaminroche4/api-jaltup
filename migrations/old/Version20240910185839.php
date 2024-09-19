@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace DoctrineMigrations\old;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240912074953 extends AbstractMigration
+final class Version20240910185839 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,12 @@ final class Version20240912074953 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_4FBF094FB5B48B91 ON company (public_id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_29D6873EB5B48B91 ON offer (public_id)');
+        $this->addSql('ALTER TABLE category ADD public_id VARCHAR(20) NOT NULL AFTER id');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX UNIQ_4FBF094FB5B48B91 ON company');
-        $this->addSql('DROP INDEX UNIQ_29D6873EB5B48B91 ON offer');
+        $this->addSql('ALTER TABLE category DROP public_id');
     }
 }
