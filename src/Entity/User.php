@@ -24,9 +24,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ApiResource(
     operations: [
-        new Get(),
+        new Get(
+            uriTemplate: '/users/{publicId}',
+            uriVariables: ['publicId'],
+        ),
         new GetCollection(),
         new Post(
+            uriTemplate: '/register',
             openapiContext: [
                 'requestBody' => [
                     'content' => [
