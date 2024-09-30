@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
@@ -14,6 +15,7 @@ use App\Enum\ContractType;
 use App\Enum\PublicationStatus;
 use App\Enum\StudyLevel;
 use App\Repository\OfferRepository;
+use App\State\OfferCountProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -29,6 +31,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     description: 'Get the offer information.',
     operations: [
+        new Get(
+            uriTemplate: '/offers/count',
+            openapiContext: [
+                'summary' => 'Get the number of published offers.',
+                'responses' => [
+                    '200' => [
+                        'description' => 'The number of published offers.',
+                        'content' => [
+                            'application/ld+json' => [
+                                'schema' => [
+                                    'type' => 'object',
+                                    'properties' => [
+                                        'count' => [
+                                            'type' => 'integer',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            provider: OfferCountProvider::class,
+        ),
         new Get(
             uriTemplate: '/offers/{publicId}',
             uriVariables: ['publicId'],
@@ -51,7 +77,7 @@ class Offer
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 20, unique: true)]
+    #[ORM\Column(length: 20, unique: true)]
     #[Groups(['offer:read'])]
     #[Assert\Unique]
     #[ApiProperty(description: 'The public identifier of the offer.', )]
@@ -171,7 +197,7 @@ class Offer
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['offer:read'])]
-    #[ApiProperty(description: 'The date when it will be set to "Archived".', )]
+    #[ApiProperty(description: 'The end of the offer validity.', )]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(length: 255)]
@@ -184,6 +210,11 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'offers')]
     #[Groups(['offer:read', 'offer:write'])]
     private Collection $category;
+
+    #[ORM\Column]
+    #[Groups(['offer:read', 'offer:write'])]
+    #[ApiFilter(BooleanFilter::class, strategy: 'exact')]
+    private ?bool $premium = null;
 
     public function __construct()
     {
@@ -347,6 +378,18 @@ class Offer
     public function setEndDate(\DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function isPremium(): ?bool
+    {
+        return $this->premium;
+    }
+
+    public function setPremium(bool $premium): static
+    {
+        $this->premium = $premium;
 
         return $this;
     }

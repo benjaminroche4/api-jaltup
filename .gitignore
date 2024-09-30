@@ -19,3 +19,7 @@
 phpstan.neon.dist
 /phpstan.dist.neon
 ###< phpstan/phpstan ###
+
+/.idea
+.idea
+/.idea/
