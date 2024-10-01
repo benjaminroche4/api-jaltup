@@ -23,6 +23,7 @@ phpstan.neon.dist
 /.idea
 .idea
 /.idea/
+/public/.htaccess
 
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
