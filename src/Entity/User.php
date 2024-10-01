@@ -27,8 +27,23 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Get(
             uriTemplate: '/users/{publicId}',
             uriVariables: ['publicId'],
+            openapiContext: [
+                'security' => [
+                    ['access_token' => []],
+                ],
+            ],
+            security: 'is_granted("ROLE_ADMIN")',
+            securityMessage: 'You don\'t have permission to access this resource.',
         ),
-        new GetCollection(),
+        new GetCollection(
+            openapiContext: [
+                'security' => [
+                    ['access_token' => []],
+                ],
+            ],
+            security: 'is_granted("ROLE_ADMIN")',
+            securityMessage: 'You don\'t have permission to access this resource.'
+        ),
         new Post(
             uriTemplate: '/register',
             openapiContext: [
@@ -52,32 +67,15 @@ use Symfony\Component\Validator\Constraints as Assert;
                 ],
             ],
         ),
-        new Post(
-            controller: SecurityController::class,
-            openapiContext: [
-                'requestBody' => [
-                    'content' => [
-                        'application/ld+json' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'email' => [
-                                        'type' => 'string',
-                                        'format' => 'email',
-                                    ],
-                                    'password' => [
-                                        'type' => 'string',
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-            name: 'app_login',
-        ),
         new Get(
             uriTemplate: '/me',
+            openapiContext: [
+                'security' => [
+                    ['access_token' => []],
+                ],
+            ],
+            security: 'is_granted("ROLE_USER")',
+            securityMessage: 'You don\'t have permission to access this resource.',
             provider: UserStateProvider::class,
         ),
     ],

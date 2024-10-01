@@ -29,7 +29,15 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriVariables: ['publicId'],
         ),
         new GetCollection(),
-        new Post(),
+        new Post(
+            openapiContext: [
+                'security' => [
+                    ['access_token' => []],
+                ],
+            ],
+            security: 'is_granted("ROLE_ADMIN")',
+            securityMessage: 'You don\'t have permission to access this resource.',
+        ),
     ],
     normalizationContext: [
         'groups' => ['category:read'],
