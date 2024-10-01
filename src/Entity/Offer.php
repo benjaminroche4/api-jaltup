@@ -205,7 +205,7 @@ class Offer
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['offer:read'])]
-    #[ApiProperty(description: 'The end of the offer validity.', )]
+    #[ApiProperty(description: 'The date when the offer\'s validity expires.', )]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(length: 255)]
@@ -227,6 +227,20 @@ class Offer
     public function __construct()
     {
         $this->category = new ArrayCollection();
+    }
+
+    #[Groups(['offer:read'])]
+    #[ApiProperty(description: 'The number of days remaining until the offer\'s validity expires.' )]
+    public function getDayLast(): ?int
+    {
+        if ($this->endDate === null) {
+            return null;
+        }
+
+        $now = new \DateTimeImmutable();
+        $interval = $now->diff($this->endDate);
+
+        return $interval->days;
     }
 
     public function getId(): ?int

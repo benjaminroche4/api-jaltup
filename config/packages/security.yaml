@@ -21,6 +21,7 @@ security:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
         api:
             pattern: ^/api
             stateless: true
@@ -28,6 +29,7 @@ security:
             jwt: ~
             refresh_jwt:
                 check_path: /api/token/refresh
+
 #        main:
 #            lazy: true
 #            provider: app_user_provider

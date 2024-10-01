@@ -67,30 +67,6 @@ use Symfony\Component\Validator\Constraints as Assert;
                 ],
             ],
         ),
-        new Post(
-            controller: SecurityController::class,
-            openapiContext: [
-                'requestBody' => [
-                    'content' => [
-                        'application/ld+json' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'email' => [
-                                        'type' => 'string',
-                                        'format' => 'email',
-                                    ],
-                                    'password' => [
-                                        'type' => 'string',
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-            name: 'app_login',
-        ),
         new Get(
             uriTemplate: '/me',
             openapiContext: [
