@@ -36,7 +36,6 @@ class OpenApiFactoryDecorator implements OpenApiFactoryInterface
             scheme: 'bearer',
         );
 
-        $openApi = ($this->decorated)($context);
         $authPath = $openApi->getPaths()->getPath($this->loginCheck);
 
         if ($authPath instanceof PathItem && $authPath->getPost() instanceof Operation) {
