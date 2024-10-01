@@ -1,5 +1,6 @@
 api_platform:
-    title: Hello API Platform
+    title: Jaltup
+    description: The Jaltup API allows you to easily manage and access resources. It’s designed for fast, secure, and efficient integration into your applications, providing essential endpoints for data handling.
     version: 1.0.0
     formats:
         jsonld: ['application/ld+json']
