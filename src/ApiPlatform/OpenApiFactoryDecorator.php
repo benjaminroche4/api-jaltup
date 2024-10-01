@@ -7,7 +7,6 @@ use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\SecurityScheme;
 use ApiPlatform\OpenApi\OpenApi;
-use phpDocumentor\Reflection\Types\Void_;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -23,9 +22,8 @@ class OpenApiFactoryDecorator implements OpenApiFactoryInterface
 {
     public function __construct(
         private readonly OpenApiFactoryInterface $decorated,
-        private readonly string $loginCheck
-    )
-    {
+        private readonly string $loginCheck,
+    ) {
     }
 
     public function __invoke(array $context = []): OpenApi
