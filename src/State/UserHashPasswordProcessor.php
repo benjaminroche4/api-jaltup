@@ -15,14 +15,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 readonly class UserHashPasswordProcessor implements ProcessorInterface
 {
     public function __construct(
-        private ProcessorInterface          $innerProcessor,
+        private ProcessorInterface $innerProcessor,
         private UserPasswordHasherInterface $userPasswordHasher,
     ) {
     }
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
-        if($data instanceof User && $data->getPlainPassword() !== null) {
+        if ($data instanceof User && null !== $data->getPlainPassword()) {
             $data->setPassword($this->userPasswordHasher->hashPassword($data, $data->getPlainPassword()));
             $data->eraseCredentials();
         }
