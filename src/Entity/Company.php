@@ -85,7 +85,7 @@ class Company
     private ?string $websiteUrl = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['company:read', 'company:write'])]
+    #[Groups(['company:read', 'company:write', 'offer:read'])]
     private ?string $logo = null;
 
     #[ORM\Column]
