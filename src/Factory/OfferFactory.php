@@ -33,6 +33,14 @@ final class OfferFactory extends PersistentProxyObjectFactory
         'Intelligence Artificielle', 'Agilité', 'Support IT', 'SEO/SEA',
         'Communication', 'Comptabilité', 'Droit des Entreprises', 'Logistique',
     ];
+    private const OFFER_CITY = [
+        'Paris', 'Lyon', 'Marseille', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille',
+        'Rennes', 'Reims', 'Le Havre', 'Saint-Étienne', 'Toulon', 'Grenoble', 'Dijon', 'Angers', 'Nîmes', 'Villeurbanne'
+    ];
+    private const OFFER_POSTAL_CODES = [
+        '75000', '69000', '13000', '31000', '06000', '44000', '67000', '34000', '33000', '59000',
+        '35000', '51100', '76600', '42000', '83000', '38000', '21000', '49000', '30000', '69100'
+    ];
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -57,14 +65,14 @@ final class OfferFactory extends PersistentProxyObjectFactory
             'title' => self::faker()->randomElement(self::OFFER_TITLE),
             'place' => [
                 'fullAddress' => self::faker()->address(),
-                'city' => self::faker()->city(),
-                'zipCode' => self::faker()->postcode(),
+                'city' => self::faker()->randomElement(self::OFFER_CITY),
+                'zipCode' => self::faker()->randomElement(self::OFFER_POSTAL_CODES),
                 'latitude' => self::faker()->latitude(),
                 'longitude' => self::faker()->longitude(),
             ],
             'job' => [
                 'description' => self::faker()->text(),
-                'contractType' => self::faker()->randomElement([ContractType::FixedTerm->value, ContractType::Permanent->value, ContractType::Apprenticeship->value, ContractType::Professionalization->value]),
+                'contractType' => self::faker()->randomElement([ContractType::FixedTerm->value, ContractType::Permanent->value, ContractType::Apprenticeship->value]),
                 'duration' => self::faker()->numberBetween(1, 12),
                 'remote' => self::faker()->boolean(),
                 'studyLevel' => self::faker()->randomElement([StudyLevel::NoDiploma->value, StudyLevel::CAP->value, StudyLevel::BAC->value, StudyLevel::BAC2->value]),
