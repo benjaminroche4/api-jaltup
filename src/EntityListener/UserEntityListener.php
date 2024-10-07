@@ -25,7 +25,9 @@ readonly class UserEntityListener
     public function prePersist(User $user, LifecycleEventArgs $args): void
     {
         $user->setPublicId(IdGeneratorService::generateUniqueId(10));
-        $user->setCreatedAt(new \DateTimeImmutable());
+        if ($user->getCreatedAt() === null) {
+            $user->setCreatedAt(new \DateTimeImmutable());
+        }
     }
 
     public function preUpdate(Offer $offer, LifecycleEventArgs $args): void

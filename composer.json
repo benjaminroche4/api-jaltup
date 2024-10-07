@@ -84,10 +84,12 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
         "friendsofphp/php-cs-fixer": "^3.64",
         "phpmd/phpmd": "@stable",
         "phpstan/phpstan": "^1.12",
         "symfony/maker-bundle": "^1.61",
-        "symfony/web-profiler-bundle": "7.1.*"
+        "symfony/web-profiler-bundle": "7.1.*",
+        "zenstruck/foundry": "^2.1"
     }
 }
