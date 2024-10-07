@@ -7,7 +7,7 @@ namespace App\Enum;
  */
 enum StudyLevel: string
 {
-    case NoDiploma = 'no_diploma'; // Sans diplôme
+    case NoDiploma = 'Sans diplôme'; // Sans diplôme
     case BEP = 'bep'; // BEP
     case CAP = 'cap'; // CAP
     case BAC = 'bac'; // BAC

@@ -7,8 +7,8 @@ namespace App\Enum;
  */
 enum ContractType: string
 {
-    case FixedTerm = 'fixed_term'; // CDD
-    case Permanent = 'permanent'; // CDI
-    case Apprenticeship = 'apprenticeship'; // Alternance
-    case Professionalization = 'professionalization'; // Contrat de professionnalisation
+    case FixedTerm = 'CDD'; // CDD
+    case Permanent = 'CDI'; // CDI
+    case Apprenticeship = 'Alternance'; // Alternance
+    case Professionalization = 'Professionalisation'; // Contrat de professionalisation
 }
