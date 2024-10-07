@@ -27,10 +27,11 @@ readonly class OfferEntityListener
     {
         $offer->setSlug($this->slugger->slug($offer->getTitle())->lower()->toString());
         $offer->setPublicId(IdGeneratorService::generateUniqueId(6));
-        $offer->setCreatedAt(new \DateTimeImmutable());
+        if ($offer->getCreatedAt() === null) {
+            $offer->setCreatedAt(new \DateTimeImmutable());
+        }
         // By default, the offer is valid for one month
-        $offer->setEndDate(new \DateTimeImmutable('+1 month'));
-    }
+        $offer->setEndDate($offer->getCreatedAt()->modify('+1 month'));    }
 
     public function preUpdate(Offer $offer, LifecycleEventArgs $args): void
     {

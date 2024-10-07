@@ -41,6 +41,7 @@ final class UserFactory extends PersistentProxyObjectFactory
             'email' => self::faker()->email(),
             'password' => 'password',
             'roles' => [self::faker()->randomElement(self::USER_ROLES)],
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-5 days')),
         ];
     }
 

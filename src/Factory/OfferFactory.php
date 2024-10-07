@@ -76,7 +76,7 @@ final class OfferFactory extends PersistentProxyObjectFactory
             'premium' => self::faker()->boolean(),
             'category' => CategoryFactory::createMany(1),
             'company' => CompanyFactory::new(),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-1 month', 'now')),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-15 days')),
         ];
     }
 

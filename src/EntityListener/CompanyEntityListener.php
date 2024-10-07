@@ -28,7 +28,9 @@ readonly class CompanyEntityListener
     {
         $company->setSlug($this->slugger->slug($company->getName())->lower()->toString());
         $company->setPublicId(IdGeneratorService::generateUniqueId(6));
-        $company->setCreatedAt(new \DateTimeImmutable());
+        if ($company->getCreatedAt() === null) {
+            $company->setCreatedAt(new \DateTimeImmutable());
+        }
     }
 
     public function preUpdate(Company $company, LifecycleEventArgs $args): void
