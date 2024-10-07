@@ -26,7 +26,7 @@ final class OfferFactory extends PersistentProxyObjectFactory
         'Chargé de Communication', 'Comptable Senior',
         'Juriste d’Entreprise', 'Responsable Logistique',
     ];
-    private const OFFER_TAGS = [
+    private const OFFER_TAG = [
         'Développement Web', 'Cybersécurité', 'Gestion de Projet', 'Science des Données',
         'Transformation Digitale', 'Apprentissage Automatique', 'Cloud Computing', 'Réseaux et Systèmes',
         'Finance', 'Marketing Digital', 'Ressources Humaines', 'Blockchain',
@@ -71,7 +71,7 @@ final class OfferFactory extends PersistentProxyObjectFactory
                 'startDate' => self::faker()->dateTimeBetween('+1 week', '+1 month')->format('Y-m-d'),
             ],
             'url' => self::faker()->url(),
-            'tag' => self::faker()->randomElements(self::OFFER_TAGS, self::faker()->numberBetween(1, 5)),
+            'tag' => self::faker()->randomElements(self::OFFER_TAG, self::faker()->numberBetween(1, 5)),
             'status' => self::faker()->randomElement([PublicationStatus::Published->value, PublicationStatus::Expired->value]),
             'premium' => self::faker()->boolean(),
             'category' => CategoryFactory::createMany(1),
