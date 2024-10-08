@@ -193,9 +193,9 @@ class Offer
     #[Groups(['offer:read', 'offer:write'])]
     #[Assert\Choice(choices: [
         PublicationStatus::Published->value,
-        PublicationStatus::Draft->value,
         PublicationStatus::Archived->value,
     ], message: 'Invalid status')]
+    #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private ?string $status = null;
 
     #[ORM\Column]
