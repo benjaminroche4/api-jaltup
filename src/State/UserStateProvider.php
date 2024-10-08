@@ -12,11 +12,11 @@ use Symfony\Component\Serializer\SerializerInterface;
 /**
  * Provides the current user.
  */
-class UserStateProvider implements ProviderInterface
+readonly class UserStateProvider implements ProviderInterface
 {
     public function __construct(
-        private readonly Security $security,
-        private readonly SerializerInterface $serializer,
+        private Security            $security,
+        private SerializerInterface $serializer,
     ) {
     }
 
