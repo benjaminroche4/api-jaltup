@@ -71,7 +71,7 @@ final class OfferFactory extends PersistentProxyObjectFactory
                 'longitude' => self::faker()->longitude(),
             ],
             'job' => [
-                'description' => self::faker()->text(),
+                'description' => self::faker()->text(1500),
                 'contractType' => self::faker()->randomElement([ContractType::FixedTerm->value, ContractType::Permanent->value, ContractType::Apprenticeship->value]),
                 'duration' => self::faker()->numberBetween(1, 12),
                 'remote' => self::faker()->boolean(),
