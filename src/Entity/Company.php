@@ -81,7 +81,7 @@ class Company
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Url]
-    #[Groups(['company:read', 'company:write'])]
+    #[Groups(['company:read', 'company:write', 'offer:read'])]
     private ?string $websiteUrl = null;
 
     #[ORM\Column(length: 255, nullable: true)]
