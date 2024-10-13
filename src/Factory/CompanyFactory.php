@@ -47,6 +47,7 @@ final class CompanyFactory extends PersistentProxyObjectFactory
             'websiteUrl' => self::faker()->url(),
             'logo' => self::faker()->randomElement(self::COMPANY_LOGO),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-2 months')),
+            'verified' => self::faker()->boolean(),
         ];
     }
 

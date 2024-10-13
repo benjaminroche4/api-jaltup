@@ -103,6 +103,10 @@ class Company
     #[ORM\OneToMany(targetEntity: Offer::class, mappedBy: 'company')]
     private Collection $offers;
 
+    #[ORM\Column]
+    #[Groups(['company:read', 'company:write', 'offer:read'])]
+    private ?bool $verified = null;
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
@@ -247,6 +251,18 @@ class Company
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): static
+    {
+        $this->verified = $verified;
 
         return $this;
     }
