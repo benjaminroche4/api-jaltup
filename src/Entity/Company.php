@@ -107,6 +107,13 @@ class Company
     #[Groups(['company:read', 'company:write', 'offer:read'])]
     private ?bool $verified = null;
 
+    #[Groups(['company:read', 'offer:read'])]
+    #[ApiProperty(description: 'The number of offers for the company.')]
+    public function getOfferNumber(): int
+    {
+        return $this->offers->count();
+    }
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
