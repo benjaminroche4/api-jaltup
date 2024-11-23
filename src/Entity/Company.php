@@ -70,6 +70,10 @@ class Company
     #[Groups(['company:read', 'company:write'])]
     private ?string $siret = null;
 
+    #[ORM\Column(length: 50)]
+    #[Groups(['company:read', 'company:write'])]
+    private ?string $headOfficeCity = null;
+
     #[ORM\Column(length: 120, nullable: true)]
     #[Assert\Email]
     #[Groups(['company:read', 'company:write'])]
@@ -270,6 +274,18 @@ class Company
     public function setVerified(bool $verified): static
     {
         $this->verified = $verified;
+
+        return $this;
+    }
+
+    public function getHeadOfficeCity(): ?string
+    {
+        return $this->headOfficeCity;
+    }
+
+    public function setHeadOfficeCity(string $headOfficeCity): static
+    {
+        $this->headOfficeCity = $headOfficeCity;
 
         return $this;
     }

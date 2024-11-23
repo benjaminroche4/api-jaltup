@@ -42,6 +42,7 @@ final class CompanyFactory extends PersistentProxyObjectFactory
         return [
             'name' => self::faker()->randomElement(self::COMPANY_NAME),
             'siret' => self::faker()->randomNumber(9),
+            'headOfficeCity' => self::faker()->city(),
             'contactEmail' => self::faker()->email(),
             'phoneNumber' => self::faker()->phoneNumber(),
             'websiteUrl' => self::faker()->url(),
