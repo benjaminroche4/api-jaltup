@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\User;
+use App\Enum\StudyLevel;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -42,6 +43,15 @@ final class UserFactory extends PersistentProxyObjectFactory
             'password' => 'password',
             'roles' => [self::faker()->randomElement(self::USER_ROLES)],
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-5 days')),
+            'firstName' => self::faker()->firstName(),
+            'lastName' => self::faker()->lastName(),
+            'referralCode' => self::faker()->unique()->regexify('[A-Z0-9]{6}'),
+            'profilePicture' => 'https://api.dicebear.com/9.x/thumbs/svg?seed=' . self::faker()->firstName(),
+            'study' => [
+                'level' => self::faker()->randomElement([StudyLevel::NoDiploma->value, StudyLevel::CAP->value, StudyLevel::BAC->value, StudyLevel::BAC2->value]),
+                'city' => self::faker()->city,
+                'school' => self::faker()->company(),
+            ]
         ];
     }
 

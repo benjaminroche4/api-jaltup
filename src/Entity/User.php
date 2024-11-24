@@ -125,6 +125,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:write', 'user:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 70)]
+    private ?string $lastName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $referralCode = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $profilePicture = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $study = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -232,5 +247,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword(string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): static
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): static
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getReferralCode(): ?string
+    {
+        return $this->referralCode;
+    }
+
+    public function setReferralCode(?string $referralCode): static
+    {
+        $this->referralCode = $referralCode;
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(string $profilePicture): static
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    public function getStudy(): ?array
+    {
+        return $this->study;
+    }
+
+    public function setStudy(?array $study): static
+    {
+        $this->study = $study;
+
+        return $this;
     }
 }
