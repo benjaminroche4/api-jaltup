@@ -26,6 +26,7 @@ readonly class UserEntityListener
     {
         $user->setPublicId(IdGeneratorService::generateUniqueId(10));
         $user->setRoles(['ROLE_USER']);
+        $user->setProfilePicture('https://api.dicebear.com/9.x/thumbs/svg?seed=' . $user->getFirstName());
         if ($user->getCreatedAt() === null) {
             $user->setCreatedAt(new \DateTimeImmutable());
         }
