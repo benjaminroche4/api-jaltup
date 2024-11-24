@@ -10,6 +10,8 @@ use ApiPlatform\Metadata\Post;
 use App\Controller\SecurityController;
 use App\Repository\UserRepository;
 use App\State\UserStateProvider;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -139,6 +141,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?array $study = null;
+
+    /**
+     * @var Collection<int, Category>
+     */
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'users')]
+    private Collection $userInterest;
+
+    public function __construct()
+    {
+        $this->userInterest = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -305,6 +318,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStudy(?array $study): static
     {
         $this->study = $study;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getUserInterest(): Collection
+    {
+        return $this->userInterest;
+    }
+
+    public function addUserInterest(Category $userInterest): static
+    {
+        if (!$this->userInterest->contains($userInterest)) {
+            $this->userInterest->add($userInterest);
+        }
+
+        return $this;
+    }
+
+    public function removeUserInterest(Category $userInterest): static
+    {
+        $this->userInterest->removeElement($userInterest);
 
         return $this;
     }

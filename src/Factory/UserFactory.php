@@ -51,7 +51,8 @@ final class UserFactory extends PersistentProxyObjectFactory
                 'level' => self::faker()->randomElement([StudyLevel::NoDiploma->value, StudyLevel::CAP->value, StudyLevel::BAC->value, StudyLevel::BAC2->value]),
                 'city' => self::faker()->city,
                 'school' => self::faker()->company(),
-            ]
+            ],
+            'userInterest' => CategoryFactory::createMany(3),
         ];
     }
 
