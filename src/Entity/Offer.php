@@ -118,13 +118,7 @@ class Offer
         ]
     )]
     #[ApiFilter(SearchFilter::class, strategy: 'partial')]
-    private array $place = [
-        'fullAddress' => '1 rue de Champs de Mars',
-        'city' => 'Paris',
-        'zipCode' => 75000,
-        'latitude' => 48.866667,
-        'longitude' => 2.333333,
-    ];
+    private array $place = [];
 
     #[ORM\Column(type: 'json')]
     #[Groups(['offer:read', 'offer:write'])]
@@ -159,6 +153,7 @@ class Offer
                     StudyLevel::BAC3->value,
                     StudyLevel::BAC4->value,
                     StudyLevel::BAC5->value,
+                    StudyLevel::BAC8->value,
                 ], message: 'Invalid study level'),
             ]),
             'startDate' => new Assert\Optional([
@@ -166,14 +161,7 @@ class Offer
             ]),
         ]
     )]
-    private array $job = [
-        'description' => 'This is the description...',
-        'contractTye' => 'permanent',
-        'duration' => 6,
-        'remote' => false,
-        'studyLevel' => 'bac+2',
-        'startDate' => '2024-09-05T09:06:10.188Z',
-    ];
+    private array $job = [];
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[Groups(['offer:read', 'offer:write', 'category:read'])]

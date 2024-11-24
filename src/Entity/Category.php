@@ -61,7 +61,7 @@ class Category
     private ?string $publicId = null;
 
     #[ORM\Column(length: 120)]
-    #[Groups(['category:read', 'category:write', 'offer:read'])]
+    #[Groups(['category:read', 'category:write', 'offer:read', 'user:read'])]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private ?string $name = null;
 

@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Controller\SecurityController;
+use App\Enum\StudyLevel;
 use App\Repository\UserRepository;
 use App\State\UserStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -61,8 +62,32 @@ use Symfony\Component\Validator\Constraints as Assert;
                                     ],
                                     'password' => [
                                         'type' => 'string',
+                                        'format' => 'password',
                                     ],
-                                ],
+                                    'firstName' => [
+                                        'type' => 'string',
+                                    ],
+                                    'lastName' => [
+                                        'type' => 'string',
+                                    ],
+                                    'referralCode' => [
+                                        'type' => 'string',
+                                    ],
+                                    'study' => [
+                                        'type' => 'json',
+                                        'example' => [
+                                            'school' => 'string',
+                                            'city' => 'string',
+                                            'level' => 'string',
+                                        ]
+                                    ],
+                                    'userInterest' => [
+                                        'type' => 'array',
+                                        'example' => [
+                                            '/api/categories/PUBLIC_ID',
+                                        ]
+                                    ]
+                                ]
                             ],
                         ],
                     ],
@@ -128,24 +153,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['user:read', 'user:write'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 70)]
+    #[Groups(['user:read', 'user:write'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user:read', 'user:write'])]
     private ?string $referralCode = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:read'])]
     private ?string $profilePicture = null;
 
     #[ORM\Column(nullable: true)]
-    private ?array $study = null;
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\Collection(
+        fields: [
+            'school' => [
+                new Assert\Type(type: 'string'),
+            ],
+            'city' => [
+                new Assert\Type(type: 'string'),
+            ],
+            'level' => new Assert\Optional([
+                new Assert\Type(type: 'string'),
+                new Assert\Choice(choices: [
+                    StudyLevel::NoDiploma->value,
+                    StudyLevel::BEP->value,
+                    StudyLevel::CAP->value,
+                    StudyLevel::BAC->value,
+                    StudyLevel::BAC2->value,
+                    StudyLevel::BAC3->value,
+                    StudyLevel::BAC4->value,
+                    StudyLevel::BAC5->value,
+                    StudyLevel::BAC8->value,
+                ], message: 'Invalid study level'),
+            ]),
+        ]
+    )]
+    private ?array $study = [];
 
     /**
      * @var Collection<int, Category>
      */
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'users')]
+    #[Groups(['user:read', 'user:write'])]
     private Collection $userInterest;
 
     public function __construct()
