@@ -194,7 +194,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             ]),
         ]
     )]
-    private ?array $study = [];
+    private ?array $study = null;
 
     /**
      * @var Collection<int, Category>
