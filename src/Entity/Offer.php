@@ -212,6 +212,12 @@ class Offer
     #[ApiFilter(BooleanFilter::class, strategy: 'exact')]
     private ?bool $premium = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $externalId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $serviceName = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -400,6 +406,30 @@ class Offer
     public function setPremium(bool $premium): static
     {
         $this->premium = $premium;
+
+        return $this;
+    }
+
+    public function getExternalId(): ?string
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId(?string $externalId): static
+    {
+        $this->externalId = $externalId;
+
+        return $this;
+    }
+
+    public function getServiceName(): ?string
+    {
+        return $this->serviceName;
+    }
+
+    public function setServiceName(?string $serviceName): static
+    {
+        $this->serviceName = $serviceName;
 
         return $this;
     }
