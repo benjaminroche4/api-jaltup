@@ -7,7 +7,7 @@ namespace App\Service;
  */
 class IdGeneratorService
 {
-    public static function generateUniqueId(int $length = 6): string
+    public static function generateUniqueId(int $length = 10): string
     {
         $digits = range('0', '9');
         $uppercaseLetters = range('A', 'Z');

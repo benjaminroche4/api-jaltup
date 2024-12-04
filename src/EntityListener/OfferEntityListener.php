@@ -26,7 +26,7 @@ readonly class OfferEntityListener
     public function prePersist(Offer $offer, LifecycleEventArgs $args): void
     {
         $offer->setSlug($this->slugger->slug($offer->getTitle())->lower()->toString());
-        $offer->setPublicId(IdGeneratorService::generateUniqueId(6));
+        $offer->setPublicId(IdGeneratorService::generateUniqueId());
         if ($offer->getCreatedAt() === null) {
             $offer->setCreatedAt(new \DateTimeImmutable());
         }

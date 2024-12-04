@@ -24,7 +24,7 @@ readonly class UserEntityListener
 
     public function prePersist(User $user, LifecycleEventArgs $args): void
     {
-        $user->setPublicId(IdGeneratorService::generateUniqueId(10));
+        $user->setPublicId(IdGeneratorService::generateUniqueId());
         $user->setRoles(['ROLE_USER']);
         $user->setProfilePicture('https://api.dicebear.com/9.x/thumbs/svg?seed=' . $user->getFirstName());
         if ($user->getCreatedAt() === null) {
