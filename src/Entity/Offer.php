@@ -95,6 +95,12 @@ class Offer
     #[ORM\Column(length: 120)]
     #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     #[Groups(['offer:read', 'offer:write', 'category:read', 'company:read'])]
+    #[Assert\Length(
+        min: 5,
+        max: 70,
+        minMessage: 'The offer title must be at least {{ limit }} characters long',
+        maxMessage: 'The offer title code be longer than {{ limit }} characters',
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: 'json')]
@@ -166,12 +172,24 @@ class Offer
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[Groups(['offer:read', 'offer:write', 'category:read'])]
+    #[Assert\Length(
+        min: 5,
+        max: 120,
+        minMessage: 'The offer company be at least {{ limit }} characters long',
+        maxMessage: 'The offer company code be longer than {{ limit }} characters',
+    )]
     private ?Company $company = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Url]
     #[Groups(['offer:read', 'offer:write'])]
     #[ApiProperty(description: 'Original URL of the offer', )]
+    #[Assert\Length(
+        min: 5,
+        max: 180,
+        minMessage: 'The offer origin url must be at least {{ limit }} characters long',
+        maxMessage: 'The offer origin url code be longer than {{ limit }} characters',
+    )]
     private ?string $url = null;
 
     #[ORM\Column(nullable: true)]
@@ -194,7 +212,7 @@ class Offer
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['offer:read'])]
-    #[ApiProperty(description: 'The date when the offer\'s validity expires.', )]
+    #[ApiProperty(description: 'The expiration date of the offer\'s validity.')]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(length: 255)]

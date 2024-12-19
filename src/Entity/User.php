@@ -130,6 +130,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'The user email must be at least {{ limit }} characters long',
+        maxMessage: 'The user email cannot be longer than {{ limit }} characters',
+    )]
     private ?string $email = null;
 
     /**
@@ -147,6 +153,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups(['user:write'])]
     #[SerializedName('password')]
+    #[Assert\Length(
+        min: 5,
+        max: 100,
+        minMessage: 'The user password must be at least {{ limit }} characters long',
+        maxMessage: 'The user password cannot be longer than {{ limit }} characters',
+    )]
     private ?string $plainPassword = null;
 
     #[ORM\Column]
@@ -155,14 +167,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'The user first name must be at least {{ limit }} characters long',
+        maxMessage: 'The user first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 70)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'The user last name must be at least {{ limit }} characters long',
+        maxMessage: 'The user last name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['user:read', 'user:write'])]
+    #[Assert\Length(
+        min: 5,
+        max: 30,
+        minMessage: 'The user referral code must be at least {{ limit }} characters long',
+        maxMessage: 'The user referral code be longer than {{ limit }} characters',
+    )]
     private ?string $referralCode = null;
 
     #[ORM\Column(length: 255)]

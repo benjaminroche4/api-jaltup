@@ -64,6 +64,12 @@ class Category
     #[ORM\Column(length: 120)]
     #[Groups(['category:read', 'category:write', 'offer:read', 'user:read'])]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The category name must be at least {{ limit }} characters long',
+        maxMessage: 'The category name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]

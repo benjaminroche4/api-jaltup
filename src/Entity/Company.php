@@ -64,29 +64,65 @@ class Company
     #[ORM\Column(length: 120)]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     #[Groups(['company:read', 'company:write', 'offer:read', 'category:read'])]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The company name must be at least {{ limit }} characters long',
+        maxMessage: 'The company name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 14, nullable: true)]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     #[Groups(['company:read', 'company:write'])]
+    #[Assert\Length(
+        min: 8,
+        max: 17,
+        minMessage: 'The company siret must be at least {{ limit }} characters long',
+        maxMessage: 'The company siret cannot be longer than {{ limit }} characters',
+    )]
     private ?string $siret = null;
 
     #[ORM\Column(length: 50)]
     #[Groups(['company:read', 'company:write'])]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The company head office city must be at least {{ limit }} characters long',
+        maxMessage: 'The company head office city cannot be longer than {{ limit }} characters',
+    )]
     private ?string $headOfficeCity = null;
 
     #[ORM\Column(length: 120, nullable: true)]
     #[Assert\Email]
     #[Groups(['company:read', 'company:write'])]
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'The company email must be at least {{ limit }} characters long',
+        maxMessage: 'The company email cannot be longer than {{ limit }} characters',
+    )]
     private ?string $contactEmail = null;
 
     #[ORM\Column(length: 20, nullable: true)]
     #[Groups(['company:read', 'company:write'])]
+    #[Assert\Length(
+        min: 8,
+        max: 16,
+        minMessage: 'The company phone number must be at least {{ limit }} characters long',
+        maxMessage: 'The company phone number cannot be longer than {{ limit }} characters',
+    )]
     private ?string $phoneNumber = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Url]
     #[Groups(['company:read', 'company:write', 'offer:read'])]
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'The company website url must be at least {{ limit }} characters long',
+        maxMessage: 'The company website url cannot be longer than {{ limit }} characters',
+    )]
     private ?string $websiteUrl = null;
 
     #[ORM\Column(length: 255, nullable: true)]
