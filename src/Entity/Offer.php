@@ -16,6 +16,7 @@ use App\Enum\PublicationStatus;
 use App\Enum\StudyLevel;
 use App\Repository\OfferRepository;
 use App\State\OfferCountProvider;
+use Container82qEBzW\getApiPlatform_SwaggerUi_ActionService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -105,6 +106,15 @@ class Offer
 
     #[ORM\Column(type: 'json')]
     #[Groups(['offer:read', 'offer:write'])]
+    #[ApiProperty(
+        example: [
+            'fullAddress' => 'string',
+            'city' => 'string',
+            'zipCode' => 'integer',
+            'latitude' => 'float',
+            'longitude' => 'float',
+        ]
+    )]
     #[Assert\Collection(
         fields: [
             'fullAddress' => new Assert\Optional([
@@ -129,6 +139,16 @@ class Offer
 
     #[ORM\Column(type: 'json')]
     #[Groups(['offer:read', 'offer:write'])]
+    #[ApiProperty(
+        example: [
+            'description' => 'string',
+            'contractType' => 'string',
+            'duration' => 'integer',
+            'remote' => 'boolean',
+            'studyLevel' => 'string',
+            'startDate' => 'string',
+        ]
+    )]
     #[Assert\Collection(
         fields: [
             'description' => [
@@ -180,7 +200,7 @@ class Offer
     )]
     #[ApiProperty(
         description: 'The public identifier of the company.',
-        example: '/api/companies/PUBLIC_ID',
+        example: '/api/companies/publicId',
     )]
     private ?Company $company = null;
 
@@ -233,7 +253,7 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'offers')]
     #[Groups(['offer:read', 'offer:write'])]
     #[ApiProperty(
-        example: ['/api/categories/PUBLIC_ID'],
+        example: ['/api/categories/publicId'],
     )]
     private Collection $category;
 

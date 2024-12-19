@@ -84,7 +84,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                                     'userInterest' => [
                                         'type' => 'array',
                                         'example' => [
-                                            '/api/categories/PUBLIC_ID',
+                                            '/api/categories/publicId',
                                         ]
                                     ]
                                 ]
