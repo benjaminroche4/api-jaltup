@@ -112,7 +112,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: [
         'groups' => ['user:write'],
     ],
-    paginationItemsPerPage: 40,
+    paginationClientItemsPerPage: true,
+    paginationMaximumItemsPerPage: 100,
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

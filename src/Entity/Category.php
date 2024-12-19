@@ -45,7 +45,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: [
         'groups' => ['category:write'],
     ],
-    paginationItemsPerPage: 40,
+    paginationClientItemsPerPage: true,
+    paginationMaximumItemsPerPage: 100,
 )]
 class Category
 {
