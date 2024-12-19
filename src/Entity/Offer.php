@@ -178,18 +178,26 @@ class Offer
         minMessage: 'The offer company be at least {{ limit }} characters long',
         maxMessage: 'The offer company code be longer than {{ limit }} characters',
     )]
+    #[ApiProperty(
+        description: 'The public identifier of the company.',
+        example: '/api/companies/PUBLIC_ID',
+    )]
     private ?Company $company = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Url]
     #[Groups(['offer:read', 'offer:write'])]
-    #[ApiProperty(description: 'Original URL of the offer', )]
+    #[ApiProperty(
+        description: 'Original URL of the offer',
+        example: 'https://www.example.com/source-url',
+    )]
     #[Assert\Length(
         min: 5,
         max: 180,
         minMessage: 'The offer origin url must be at least {{ limit }} characters long',
         maxMessage: 'The offer origin url code be longer than {{ limit }} characters',
     )]
+
     private ?string $url = null;
 
     #[ORM\Column(nullable: true)]
@@ -224,6 +232,9 @@ class Offer
      */
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'offers')]
     #[Groups(['offer:read', 'offer:write'])]
+    #[ApiProperty(
+        example: ['/api/categories/PUBLIC_ID'],
+    )]
     private Collection $category;
 
     #[ORM\Column]

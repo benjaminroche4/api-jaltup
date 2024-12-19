@@ -81,6 +81,9 @@ class Company
         minMessage: 'The company siret must be at least {{ limit }} characters long',
         maxMessage: 'The company siret cannot be longer than {{ limit }} characters',
     )]
+    #[ApiProperty(
+        example: 'string',
+    )]
     private ?string $siret = null;
 
     #[ORM\Column(length: 50)]
@@ -111,6 +114,9 @@ class Company
         max: 16,
         minMessage: 'The company phone number must be at least {{ limit }} characters long',
         maxMessage: 'The company phone number cannot be longer than {{ limit }} characters',
+    )]
+    #[ApiProperty(
+        example: 'string',
     )]
     private ?string $phoneNumber = null;
 
